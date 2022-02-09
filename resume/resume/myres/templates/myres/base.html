@@ -1,14 +1,37 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <link type="text/css" href = "{% static 'myres/css/styles.css' %}" rel="stylesheet"/>
+    <link type="image/x-icon" href = "{% static 'myres/images/logo.png' %}" rel="shortcut icon"/>
 </head>
 <body>
 <div class = "header">
+    <div class = left><a href="{% url 'home' %}"><img src='{% static "myres/images/logo.png" %} ' width="30px"></div>
     <div class = "log">
-    slfjlsjdfl
+    <div class = "right"><a class= whiteref href = "{% url 'registration' %}">Регистрация</a> |
+        <a href = "{% url 'autentification' %}" class= whiteref>Войти</a></div>
     </div>
 </div>
+
+<div class = main>
+<div class="sidebar">
+    <div class = my><a href = '#' class= whiteref>Мои сертификаты</a></div>
+</div>
+    <div class = "content">
+    {% block title %}
+        {% endblock %}
+    </div>
+
+
+</div>
+
+<div class = about>
+<a href = '#' class = "left whiteref">О сайте</a><a href = 'https://www.youtube.com/' target="_blank" class = right><img src='{% static "myres/images/icon_youtube.png" %} ' width="30px"></a>
+</div>
+
+
 </body>
 </html>
