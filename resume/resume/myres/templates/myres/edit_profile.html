@@ -1,0 +1,13 @@
+{% extends 'myres/forms.html' %}
+{% block added %}
+
+    <div class = 'string-input edit' >
+    <p><a href = "{% url 'password_change' %}" class="form-label additional-set">Смена пароля</a></p>
+        </div>
+    <div class = 'string-input edit' >
+    <p><a href = "{% url 'remove_user' %}" class="form-label additional-set">Удаление пользователя</a></p>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

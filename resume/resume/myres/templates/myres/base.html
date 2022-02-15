@@ -10,15 +10,27 @@
 <body>
 <div class = "header">
     <div class = left><a href="{% url 'home' %}"><img src='{% static "myres/images/logo.png" %} ' width="30px"></div>
+
     <div class = "log">
+        {% if request.user.is_authenticated %}
+
+         <div class = "right"><a class= whiteref href = "{% url 'home' %}">{{ user.first_name }} {{ user.last_name }}</a> |
+             <a class= whiteref href = "/edit_pro/{{ user.username }}">Редактировать профиль</a> |
+        <a href = "{% url 'logout' %}" class= whiteref>Выйти</a></div>
+        {% else %}
     <div class = "right"><a class= whiteref href = "{% url 'registration' %}">Регистрация</a> |
         <a href = "{% url 'autentification' %}" class= whiteref>Войти</a></div>
+        {% endif %}
     </div>
 </div>
 
 <div class = main>
 <div class="sidebar">
+    {% if request.user.is_authenticated %}
+    <div class = my><a href = "/edit_inf/{{ user.username }}" class= whiteref>О себе</a></div>
     <div class = my><a href = '#' class= whiteref>Мои сертификаты</a></div>
+    <div class = my><a href = '#' class= whiteref>Добавить сертификат</a></div>
+    {% endif %}
 </div>
     <div class = "content">
     {% block title %}
