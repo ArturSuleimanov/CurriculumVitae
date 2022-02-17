@@ -14,9 +14,11 @@ class Myres(models.Model):
     Модель для хранения биографии пользователя
     """
     user = models.OneToOneField(User, null=True, on_delete= models.CASCADE, related_name='profile')
+    name = models.TextField(max_length=254, null=True)
+    surname = models.TextField(max_length=254, null=True)
     about_me = models.TextField(blank = True)
     birthday = models.DateField(auto_now=False, auto_now_add=False, null=True, blank = True)
-    mobile_number = PhoneNumberField(unique = True, null = True, blank = True)
+    mobile_number = PhoneNumberField(null = True, blank = True)
     email = models.EmailField(max_length=254, null=True)
     hobby = models.TextField(blank = True)
     education = models.TextField(blank = True)
@@ -29,7 +31,7 @@ class Myres(models.Model):
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            Myres.objects.create(user=instance, email=instance.email, slug =instance.username)
+            Myres.objects.create(user=instance, email=instance.email, slug =instance.username, photo = 'photos/default.png',name =instance.first_name, surname = instance.last_name)
 
 
     @receiver(post_save, sender=User)
@@ -41,6 +43,10 @@ class Myres(models.Model):
         return reverse('home', args=[str(self.slug)])
 
 
+
+class Certificates(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete= models.CASCADE)
+    photo = models.ImageField(upload_to='certificates/%Y/%m/%d/')
 
 
 

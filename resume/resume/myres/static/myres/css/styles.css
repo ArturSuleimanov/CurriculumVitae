@@ -9,16 +9,16 @@ html {
 	height: 100%;
 }
 body {
-
 	height: 100%;
 }
 .header {
+z-index: 100;
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 20px;
 color: white;
-background: blue;
+background: #007FFF;
 text-decoration: none;
 font-family: sans-serif;
 font-size: 20px;
@@ -60,7 +60,7 @@ font-weight: 700;
 .sidebar {
 padding: 20px;
 padding-top: 100px;
-border-right: 1px solid grey;
+
 height: auto;
 width: 200px;
 background: lightgrey;
@@ -72,8 +72,16 @@ text-decoration: none;
 font-family: sans-serif;
 font-size: 22px;
 font-weight: 700;
+}
+
+.sidebar-refs {
+height: 200px;
 
 }
+
+
+
+
 
 .main {
 
@@ -96,6 +104,16 @@ font-family: sans-serif;
 font-size: 18px;
 
 }
+
+
+.main-content {
+height: calc(100% - 90px);
+margin-bottom: 30px;
+}
+
+
+
+
 
 
 .whiteref:hover {
@@ -129,6 +147,8 @@ background: #E5E4E2;
 
 .string-input p {
 margin: 0;
+display: flex;
+align-items: center;
 }
 
 
@@ -217,4 +237,253 @@ color: grey;
 .edit {
 display: flex;
 justify-content: left;
+}
+
+
+
+.string-input p {
+width: 100%;
+}
+
+
+#id_captcha_1 {
+background:red;
+border-width:1px;
+width: 100px;
+height: 30px;
+border-radius: 5px;
+font-size: 16px;
+border-color: lightgrey;
+padding: 10px;
+background: #E5E4E2;
+margin-left: 15px;
+}
+
+.certificate {
+width: 100%;
+
+}
+
+
+
+.certificate-field {
+margin-bottom: 20px;
+padding-bottom: 20px;
+border-radius: 5px;
+background:#F8F8FF;
+width: 100%;
+text-align: right;
+}
+
+
+
+.inner-cer-field {
+padding: 10px;
+transition: padding 0.3s ease-in;
+}
+
+.inner-cer-field:hover{
+padding: 0;
+}
+
+.sign {
+margin-right: 20px;
+text-decoration: none;
+color: grey;
+
+}
+
+.sign:hover {
+ color: lightblue;
+ }
+
+
+.user-post {
+display: flex;
+justify-content: left;
+width: 100%;
+background:  #F0F8FF;
+text-decoration: none;
+padding: 10px;
+border-radius: 5px;
+transition: background 0.3s ease-in;
+position: relative;
+
+}
+
+
+.user-post:hover{
+background: #AFDAFC;
+}
+
+
+.name-surname {
+text-align:justify;
+max-width: calc(100% - 250px);
+padding-left: 15px;
+padding-top: 0px;
+color: #4E5754;
+position: relative;
+text-decoration: none;
+word-wrap: break-word;
+margin-right: 5px;
+}
+
+
+a {
+text-decoration: none;
+}
+
+
+
+
+
+.search-button {
+padding: 3px;
+transition: background 0.3s ease-in;
+}
+
+.search-button:hover{
+background: #F0F8FF;
+}
+
+
+.list-pages {
+	text-align: center;
+	margin: 0 0 20px 0;
+}
+.list-pages ul {
+	margin: 20px 0 0 0;
+	padding: 0;
+	list-style: none;
+}
+.list-pages ul li {
+	display: inline-block;
+	margin: 0 20px 0 0;
+}
+.list-pages a {
+	color: #000;
+	font-size: 24px;
+	text-decoration: none;
+}
+.list-pages .page-num, .page-num-selected {
+	display: inline-block;
+	width: 60px;
+	height: 44px;
+	padding: 16px 0 0 0;
+	border: 1px solid #d0d0d0;
+	border-radius: 30px;
+}
+
+.list-pages .page-num {
+transition: box-shadow 0.1s ease-in;
+}
+
+
+
+
+.list-pages .page-num:hover {
+box-shadow: 3px 3px 1px #d0d0d0;
+}
+.list-pages .page-num-selected {
+	border: none;
+	color: #000;
+	font-size: 20px;
+}
+.list-pages .page-num-selected:hover {
+	box-shadow: none;
+}
+
+
+
+.list-pages {
+margin-left: auto;
+margin-right: auto;
+}
+
+
+
+li .page-num {
+padding: 0;
+}
+
+
+.user-portfolio-info {
+display: flex;
+justify-content: center;
+padding: 10px;
+background:  #F0F8FF;
+
+text-decoration: none;
+
+border-radius: 5px;
+
+
+}
+
+
+.profile {
+display: grid;
+background:#F8F8FF;
+border-radius: 5px;
+padding: 15px;
+color: #4E5754;
+}
+
+.contacts {
+display: flex;
+flex-direction: column;
+justify-content: left;
+word-wrap: break-word;
+min-height: 290px;
+padding: 15px;
+text-align:justify;
+}
+
+
+@media screen and (max-width: 720px) {
+.sidebar {
+height: 250px;
+border: none;
+border-bottom: 1px solid grey;
+width: 100%;
+}
+
+.main {
+display: inline;
+}
+
+
+.content {
+width: 100%;
+}
+}
+
+
+.pro_photo {
+border-radius:5px;
+object-fit:cover;
+width:270px;
+height:270px;
+}
+
+@media screen and (max-width: 1200px) {
+
+.pro_photo {
+width:100%;
+max-width: 270px;
+
+}
+}
+
+
+.cert-ref {
+color: #4E5754;
+
+text-align: right;
+}
+
+.cert-ref:hover {
+color: grey;
+background: #F0F8FF;
 }

@@ -1,0 +1,74 @@
+{% extends 'myres/base.html' %}
+{% block title %}
+{% for p in posts %}
+
+
+<div class="container profile">
+    <div class="row">
+    <div class = "col-lg-4" style="padding:7px;">
+    <div class="user-portfolio-info">
+        <img class="pro_photo" src="{{ p.photo.url }}"/>
+    </div>
+</div>
+        <div class = "col-lg-4" style="padding:7px;">
+    <div class="user-portfolio-info contacts">
+        <h1>{{ p.name }} {{ p.surname }}</h1><br>
+        {% if p.birthday %}
+        <p style="margin-bottom: 15px;"><b>Дата рождения:</b> {{ p.birthday }}</p>
+        {% endif %}
+        {% if p.mobile_number %}
+         <p style="margin-bottom: 15px;"><b>Номер телефона:</b> {{ p.mobile_number }}</p>
+        {% endif %}
+        {% if p.email %}
+        <p style="margin-bottom: 15px;"><b>Email:</b> {{ p.email }}</p>
+        {% endif %}
+    </div>
+</div>
+                {% if p.skills %}
+            <div class = "col-lg-4" style="padding:7px;">
+    <div class="user-portfolio-info contacts">
+        <p><p><b>Навыки:</b></p> {{ p.skills | linebreaks }}</p>
+    </div>
+</div>
+     {% endif %}
+{% if p.about_me %}
+            <div class = "col-lg-6" style="padding:7px;">
+    <div class="user-portfolio-info contacts">
+        <p><p><b>О себе:</b></p> {{ p.about_me | linebreaks }}</p>
+    </div>
+</div>
+     {% endif %}
+
+{% if p.hobby %}
+            <div class = "col-lg-6" style="padding:7px;">
+    <div class="user-portfolio-info contacts">
+        <p><p><b>Хобби:</b></p> {{ p.hobby | linebreaks }}</p>
+    </div>
+</div>
+     {% endif %}
+{% if p.education %}
+            <div class = "col-lg-6" style="padding:7px;">
+    <div class="user-portfolio-info contacts">
+        <p><p><b>Образование:</b></p> {{ p.education | linebreaks }}</p>
+    </div>
+</div>
+     {% endif %}
+        {% if p.working_experience %}
+            <div class = "col-lg-6" style="padding:7px;">
+    <div class="user-portfolio-info contacts">
+        <p><p><b>Опыт работы:</b></p> {{ p.working_experience | linebreaks }}</p>
+    </div>
+</div>
+
+             {% endif %}
+
+    </div>
+    <div style ='text-align: right;'>
+    <a href="/certificates/{{ p.user_id }}" class = cert-ref><h2>Сертификаты</h2></a>
+        </div>
+</div>
+
+
+{% endfor %}
+
+{% endblock %}

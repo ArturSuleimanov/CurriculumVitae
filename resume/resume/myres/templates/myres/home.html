@@ -1,0 +1,28 @@
+{% extends 'myres/show_posts_page.html' %}
+
+        {% block page_with_posts %}
+<div class="search" style = 'width: 100%; margin-bottom: 20px;'>
+<form action="{% url 'search' %}" method="get">
+  <input name="q" type="text" placeholder="Search..." style = 'width:100%; border:0; border-radius: 0px;' class="input-form">
+    <button name="page" class="search-button" type="submit" style="border: 0; border-radius: 0px; color:#808080;">Поиск</button>
+</form>
+    </div>
+{% for p in posts %}
+<a href="/profile/{{ p.slug }}">
+    <div class=user-post style="margin-bottom: 10px;">
+        <img src="{{ p.photo.url }}" style="object-fit:cover; width:250px; height:250px;"/>
+        <div class=name-surname>
+            <h2 style="margin-bottom: 15px;">{{ p.name }} {{ p.surname }}</h2>
+            {% if p.birthday %}
+            <p><h3>Дата рождения:</h3> {{ p.birthday }}</p>
+            {% endif %}
+             {% if p.about_me %}
+            <h3 style="margin-top: 15px; margin-bottom: 5px;">O cебе:</h3>
+           <p>{{p.about_me|linebreaks}}</p>
+            {% endif %}
+        </div>
+    </div>
+</a>
+{% endfor %}
+
+{% endblock %}

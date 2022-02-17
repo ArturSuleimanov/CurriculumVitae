@@ -1,6 +1,9 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm
 from django.contrib.auth.models import User
+from django.forms import HiddenInput
+
 from .models import *
 
 
@@ -14,6 +17,9 @@ class RegistrationUserForm(UserCreationForm):
     email = forms.EmailField(label="Email", widget=forms.EmailInput(attrs={"class": 'input-form'}))
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={"class": 'input-form'}))
     last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={"class": 'input-form'}))
+    captcha = CaptchaField(label='Докажите, что вы не робот')
+
+
     class Meta:
         model = User
         fields = ('username','first_name', 'last_name', 'password1', 'password2', 'email')
@@ -23,6 +29,7 @@ class RegistrationUserForm(UserCreationForm):
             'password2' : forms.PasswordInput(attrs={"class": 'input-form'}),
             'first_name': forms.TextInput(attrs={"class": 'input-form'}),
             'last_name': forms.TextInput(attrs={"class": 'input-form'}),
+
         }
 
 
@@ -34,6 +41,7 @@ class UserAuthForm(AuthenticationForm):
     """
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={"class": 'input-form'}))
     password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": 'input-form'}))
+    captcha = CaptchaField(label='Докажите, что вы не робот')
 
 
 class UpdateProfileForm(forms.ModelForm):
@@ -74,6 +82,7 @@ class ChangePassForm(PasswordChangeForm):
     old_password = forms.CharField(label="Старый пароль", widget=forms.PasswordInput(attrs={"class": 'input-form'}))
     new_password1 = forms.CharField(label="Новый пароль", widget=forms.PasswordInput(attrs={"class": 'input-form'}))
     new_password2 = forms.CharField(label="Подтверждение пароля", widget=forms.PasswordInput(attrs={"class": 'input-form'}))
+    captcha = CaptchaField(label='Докажите, что вы не робот')
 
 
 class UserEditForm(forms.ModelForm):
@@ -95,4 +104,15 @@ class UserEditForm(forms.ModelForm):
 
 
 class RemoveUser(forms.Form):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={"class": 'input-form'}))
+    username = forms.CharField(label='Введите свой логин, чтобы подтвердить удаление', widget=forms.TextInput(attrs={"class": 'input-form'}))
+    captcha = CaptchaField(label='Докажите, что вы не робот')
+
+
+
+
+class AddCertificate(forms.ModelForm):
+    photo =forms.ImageField(label= 'Сертификат', widget= forms.FileInput(attrs={'class': 'input-form file-input'}), )
+    user = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    class Meta:
+        model = Certificates
+        fields = ['photo', 'user']

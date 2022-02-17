@@ -1,0 +1,14 @@
+{% extends 'myres/show_posts_page.html' %}
+    {% block page_with_posts %}
+    {% for p in posts %}
+<div class = certificate-field>
+    <div class = inner-cer-field>
+<img src = "{{ p.photo.url }}" class = certificate />
+    </div>
+    {% if user.pk == p.user_id %}
+    <a href="/certificates/{{ user.pk }}/del_certificate/{{ p.id }}" class = sign>Удалить</a>
+    {% endif %}
+
+</div>
+{% endfor %}
+    {% endblock %}

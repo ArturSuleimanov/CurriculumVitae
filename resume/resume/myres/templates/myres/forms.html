@@ -1,6 +1,6 @@
 {% extends 'myres/base.html' %}
 {% block title %}
-<form method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 <div class = reg-form>
     {% for f in form %}

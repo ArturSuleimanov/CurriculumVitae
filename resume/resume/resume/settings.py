@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myres.apps.MyresConfig',
     "phonenumber_field",
+    "captcha"
 ]
 
 MIDDLEWARE = [
