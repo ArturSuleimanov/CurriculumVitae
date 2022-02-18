@@ -1,4 +1,5 @@
 {% extends 'myres/show_posts_page.html' %}
+{% load cache %}
 
         {% block page_with_posts %}
 <div class="search" style = 'width: 100%; margin-bottom: 20px;'>
@@ -24,5 +25,4 @@
     </div>
 </a>
 {% endfor %}
-
 {% endblock %}

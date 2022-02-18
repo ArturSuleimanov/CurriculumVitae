@@ -17,7 +17,7 @@
         <p style="margin-bottom: 15px;"><b>Дата рождения:</b> {{ p.birthday }}</p>
         {% endif %}
         {% if p.mobile_number %}
-         <p style="margin-bottom: 15px;"><b>Номер телефона:</b> {{ p.mobile_number }}</p>
+         <p style="margin-bottom: 15px;"><b>Номер телефона:</b><a href = "tel: {{ p.mobile_number }}" style="color: #4E5754;"> {{ p.mobile_number }}</a></p>
         {% endif %}
         {% if p.email %}
         <p style="margin-bottom: 15px;"><b>Email:</b> {{ p.email }}</p>

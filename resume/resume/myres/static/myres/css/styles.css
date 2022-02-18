@@ -10,6 +10,9 @@ html {
 }
 body {
 	height: 100%;
+background: #E5E4E2;
+
+
 }
 .header {
 z-index: 100;
@@ -18,27 +21,47 @@ justify-content: space-between;
 align-items: center;
 padding: 20px;
 color: white;
-background: #007FFF;
+margin-left:auto;
+margin-right:auto;
 text-decoration: none;
 font-family: sans-serif;
 font-size: 20px;
 font-weight: 700;
-position: fixed;
+
 top: 0;
 width: 100%;
-box-shadow: 0 2px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+max-width: 1240px;
 }
+
+
+.main-head {
+z-index: 100;
+
+position: fixed;
+width: 100%;
+background: #007FFF;
+box-shadow: 0 2px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+
+}
+
 
 .header a {
 color: white;
 text-decoration: none;
 
 }
+.main-about {
+width: 100%;
+display: flex;
+justify-content: center;
+background: #022027;
+}
+
 
 .about {
-
+max-width: 1240px;
 width: 100%;
-background: #022027;
+
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -84,11 +107,14 @@ height: 200px;
 
 
 .main {
-
+background: white;
+max-width: 1240px;
 display: flex;
 justify-content: space-between;
 height: auto;
 min-height: calc(100% - 50px);
+margin-left:auto;
+margin-right:auto;
 }
 
 .content {
@@ -311,12 +337,6 @@ position: relative;
 
 }
 
-
-.user-post:hover{
-background: #AFDAFC;
-}
-
-
 .name-surname {
 text-align:justify;
 max-width: calc(100% - 250px);
@@ -328,6 +348,30 @@ text-decoration: none;
 word-wrap: break-word;
 margin-right: 5px;
 }
+
+@media screen and (max-width: 1050px) {
+.user-post {
+flex-direction:column;
+
+}
+
+.user-post img {
+margin-bottom: 20px;
+margin-left: auto;
+margin-right: auto;
+border-radius: 5px;
+}
+
+.name-surname {
+max-width: 100%;}
+}
+
+.user-post:hover{
+background: #AFDAFC;
+}
+
+
+
 
 
 a {
@@ -444,18 +488,22 @@ text-align:justify;
 @media screen and (max-width: 720px) {
 .sidebar {
 height: 250px;
-border: none;
-border-bottom: 1px solid grey;
 width: 100%;
 }
 
 .main {
-display: inline;
+display:flex;
+flex-direction: column;
+justify-content: left;
+
 }
 
 
 .content {
 width: 100%;
+padding-top: 30px;
+
+
 }
 }
 

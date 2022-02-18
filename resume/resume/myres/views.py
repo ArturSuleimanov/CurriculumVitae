@@ -238,7 +238,7 @@ class AddCer(LoginRequiredMixin, CreateView):
 
 
 
-class CerPage(LoginRequiredMixin, ListView):
+class CerPage(ListView):
     """
     Страница с сертификатами
     """
@@ -246,8 +246,7 @@ class CerPage(LoginRequiredMixin, ListView):
     model = Certificates
     template_name = 'myres/certificates.html'
     context_object_name = 'posts'
-    login_url = '/auth/'
-    redirect_field_name = 'autentification'
+
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -270,7 +269,8 @@ def delete_certificate(request, user_id, cer_id):
     """
     try:
         certificate = Certificates.objects.get(pk = cer_id)
-        certificate.delete()
+        if certificate.user_id == request.user.pk:
+            certificate.delete()
         return HttpResponseRedirect(f"/certificates/{user_id}")
     except certificate.DoesNotExist:
         return HttpResponseNotFound("<h1>Certificate not found</h1>")
@@ -282,18 +282,23 @@ class HomePage(ListView):
     Домашняя страница
     """
     paginate_by = 5
+
     model = Myres
     template_name = 'myres/home.html'
     context_object_name = 'posts'
 
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Главная страница'
+
         return context
 
 
     def get_queryset(self, *args, **kwargs):
-        return Myres.objects.all()
+        return Myres.objects.order_by('-time_create')
+
+
 
 
 
@@ -303,6 +308,12 @@ class UserProfile(ListView):
     template_name = 'myres/profile.html'
     context_object_name = 'posts'
 
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(f'{self.request.user.first_name} {self.request.user.last_name}')
+        context['title'] = f'{self.request.user.first_name} {self.request.user.last_name}'
+        return context
 
 
     def get_queryset(self, *args, **kwargs):
@@ -318,6 +329,8 @@ class SearchResultsView(ListView):
     model = Myres
     template_name = 'myres/home.html'
     context_object_name = 'posts'
+
+
     def get_queryset(self):
         """
         Обработка поискового запроса
@@ -333,5 +346,5 @@ class SearchResultsView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Поиск'
+        context['title'] = 'Результаты поиска'
         return context

@@ -10,6 +10,7 @@
 </head>
 <body>
 <div id="anchor" style="height:0px;"></div>
+<div class = 'main-head'>
 <div class="header">
     <div class=left><a href="{% url 'home' %}"><img src='{% static "myres/images/logo.png" %} ' width="30px"></a></div>
 
@@ -25,7 +26,7 @@
         {% endif %}
     </div>
 </div>
-
+</div>
 <div class=main>
     <div class="sidebar">
         <div class=sidebar-refs>
@@ -48,13 +49,13 @@
 
 </div>
 
-
+<div class = main-about>
 <div class=about>
     <a href="{% url 'about' %}" class="left whiteref">О сайте</a><a href='https://www.youtube.com/' target="_blank"
                                                                     class=right><img
         src='{% static "myres/images/icon_youtube.png" %} ' width="30px"></a>
 </div>
-
+</div>
 
 </body>
 </html>

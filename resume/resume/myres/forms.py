@@ -2,16 +2,29 @@ from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.forms import HiddenInput
-
+import re
 from .models import *
+
+def validate_username(value):
+    """
+    Checks valid symbols of username
+    """
+    pattern = re.compile( r"[A-Za-z0-9_]+")
+    if not pattern.fullmatch(value):
+        raise ValidationError(
+            (f'{value} содержит недопустимые символы.'),
+            params={'value': value},
+        )
+
 
 
 class RegistrationUserForm(UserCreationForm):
     """
     Класс формы регистрации
     """
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={"class": 'input-form'}))
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={"class": 'input-form'}),  validators=[validate_username])
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={"class": 'input-form'}))
     password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput(attrs={"class": 'input-form'}))
     email = forms.EmailField(label="Email", widget=forms.EmailInput(attrs={"class": 'input-form'}))
@@ -89,7 +102,7 @@ class UserEditForm(forms.ModelForm):
     """
     Форма для изменения личной информации пользователя
     """
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={"class": 'input-form'}))
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={"class": 'input-form'}),  validators=[validate_username])
     email = forms.EmailField(label="Email", widget=forms.EmailInput(attrs={"class": 'input-form'}))
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={"class": 'input-form'}))
     last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={"class": 'input-form'}))
@@ -111,8 +124,14 @@ class RemoveUser(forms.Form):
 
 
 class AddCertificate(forms.ModelForm):
+    """
+    Certificates adding
+    """
     photo =forms.ImageField(label= 'Сертификат', widget= forms.FileInput(attrs={'class': 'input-form file-input'}), )
     user = forms.IntegerField(widget=forms.HiddenInput, required=False)
     class Meta:
         model = Certificates
         fields = ['photo', 'user']
+
+
+

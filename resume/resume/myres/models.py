@@ -26,6 +26,7 @@ class Myres(models.Model):
     skills = models.TextField(blank = True)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank = True)
     slug = models.SlugField(null = True, max_length=255, unique=True, db_index=True)
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания",  null=True)
 
     # Следующие две функции будут создавать запись в модели Myres при создании нового пользователя
     @receiver(post_save, sender=User)
