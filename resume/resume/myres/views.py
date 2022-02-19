@@ -10,7 +10,6 @@ from django.db.models import Q
 from .forms import *
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
-from django.core.paginator import Paginator
 
 
 
@@ -306,19 +305,21 @@ class HomePage(ListView):
 class UserProfile(ListView):
     model = Myres
     template_name = 'myres/profile.html'
-    context_object_name = 'posts'
+    # context_object_name = 'posts'
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        user_slug = self.kwargs.get('user_slug')
         context = super().get_context_data(**kwargs)
-        print(f'{self.request.user.first_name} {self.request.user.last_name}')
-        context['title'] = f'{self.request.user.first_name} {self.request.user.last_name}'
+        posts = Myres.objects.get(slug = user_slug)
+        context['p'] = posts
+        context['title'] = f'{posts.name} {posts.surname}'
         return context
 
 
-    def get_queryset(self, *args, **kwargs):
-        user_slug = self.kwargs.get('user_slug')
-        return Myres.objects.filter(slug = user_slug)
+    # def get_queryset(self, *args, **kwargs):
+    #     user_slug = self.kwargs.get('user_slug')
+    #     return Myres.objects.filter(slug = user_slug)
 
 
 class SearchResultsView(ListView):
@@ -337,10 +338,10 @@ class SearchResultsView(ListView):
         """
         query = self.request.GET.get('q')
         if not query:
-            return Myres.objects.all()
+            return Myres.objects.order_by('-time_create')
         object_list = Myres.objects.filter(
             Q(name__icontains=query) | Q(surname__icontains=query)
-        )
+        ).order_by('-time_create')
         return object_list
 
 
