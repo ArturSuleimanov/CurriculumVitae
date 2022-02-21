@@ -11,7 +11,7 @@
 {% for p in posts %}
 <a href="/profile/{{ p.slug }}">
     <div class=user-post style="margin-bottom: 10px;">
-        <img src="{{ p.photo.url }}" style="object-fit:cover; width:250px; height:250px;"/>
+        <img src="{{ p.photo.url }}" style="object-fit:cover; width:250px; height:250px; border-radius: 5px;"/>
         <div class=name-surname>
             <h2 style="margin-bottom: 15px;">{{ p.name }} {{ p.surname }}</h2>
             {% if p.birthday %}

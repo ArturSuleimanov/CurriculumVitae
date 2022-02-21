@@ -282,6 +282,7 @@ class HomePage(ListView):
     """
     paginate_by = 5
 
+
     model = Myres
     template_name = 'myres/home.html'
     context_object_name = 'posts'
